@@ -4,16 +4,9 @@ import {
   findGroups,
   updateGroup,
   deleteGroup,
-} from "../repositorys/groupRepository";
-import { findUserById } from "../repositorys/userRepository";
-import { Group } from "../types/groupType";
-
-interface UpdateGroupInput {
-  groupId: number;
-  ownerId: number;
-  password: string;
-  data: Partial<Pick<Group, "name" | "description" | "photoUrl" | "goalRep">>;
-}
+} from "./groupRepository";
+import { findUserById } from "../users/userRepository";
+import { CustomUpdateGroup, CustomCreateGroup } from "../../types/group.type";
 
 export const getGroupByIdService = async (id: number) => {
   const group = await findGroupById(id);
@@ -29,19 +22,12 @@ export const getGroupsService = async (page: number, pageSize: number) => {
   return groups;
 };
 
-export const createGroupService = async (data: Group) => {
-  const { name, description, photoUrl, goalRep, ownerId } = data;
-  const group = await createGroup({
-    name,
-    description,
-    photoUrl,
-    goalRep,
-    ownerId: Number(ownerId),
-  });
+export const createGroupService = async (data: CustomCreateGroup) => {
+  const group = await createGroup(data);
   return group;
 };
 
-export const updateGroupService = async (input: UpdateGroupInput) => {
+export const updateGroupService = async (input: CustomUpdateGroup) => {
   const { groupId, ownerId, password, data } = input;
   const user = await findUserById(ownerId);
   if (!user) {

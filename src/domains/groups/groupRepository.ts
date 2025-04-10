@@ -1,5 +1,5 @@
-import { prisma } from "../lib/prisma";
-import { Group } from "../types/groupType";
+import { prisma } from "../../lib/prisma";
+import { CustomCreateGroup, Group } from "../../types/group.type";
 
 // 그룹 상세조회
 export const findGroupById = async (id: number) => {
@@ -21,18 +21,14 @@ export const findGroups = async (page: number = 1, pageSize: number = 10) => {
 };
 
 // 그룹 생성
-export const createGroup = async (groupData: {
-  name: string;
-  description?: string;
-  photoUrl?: string;
-  goalRep: number;
-  ownerId: number;
-}) => {
-  const { ownerId, ...rest } = groupData;
+export const createGroup = async (groupData: CustomCreateGroup) => {
+  const { ownerId, ...groupFields } = groupData;
+
   return await prisma.group.create({
     data: {
-      ...rest,
+      ...groupFields,
       owner: { connect: { id: ownerId } },
+      ownerId,
     },
   });
 };

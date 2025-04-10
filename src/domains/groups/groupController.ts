@@ -5,9 +5,9 @@ import {
   getGroupByIdService,
   getGroupsService,
   updateGroupService,
-} from "../services/groupService";
-import { findUserById } from "../repositorys/userRepository";
-import { findGroupById } from "../repositorys/groupRepository";
+} from "./groupService";
+import { findUserById } from "../users/userRepository";
+import { findGroupById } from "./groupRepository";
 
 export const handleGetGroupById = async (
   req: Request,
