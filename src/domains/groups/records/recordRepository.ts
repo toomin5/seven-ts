@@ -1,12 +1,20 @@
 import { prisma } from "../../../lib/prisma";
-import { CustomCreateRecord } from "../../../types/record.type";
+import { Record } from "@prisma/client";
 
-
-// 그룹생성
-export const createRecord = async (data: CustomCreateRecord) => {
-  return await prisma.record.create({
+export async function createRecord(
+  data: Partial<Pick<Record, "photos" | "description">> &
+    Omit<Record, "id" | "updatedAt" | "createdAt">
+) {
+  const newRecord = await prisma.record.create({
     data,
   });
-};
+  return newRecord;
+}
 
-
+export async function updateRecord(recordId: number, data: Partial<Record>) {
+  const updateRecord = await prisma.record.update({
+    where: { id: recordId },
+    data,
+  });
+  return updateRecord;
+}
