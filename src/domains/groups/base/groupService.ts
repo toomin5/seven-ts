@@ -5,8 +5,11 @@ import {
   updateGroup,
   deleteGroup,
 } from "./groupRepository";
-import { findUserById } from "../users/userRepository";
-import { CustomUpdateGroup, CustomCreateGroup } from "../../types/group.type";
+import { findUserById } from "../../users/userRepository";
+import {
+  CustomUpdateGroup,
+  CustomCreateGroup,
+} from "../../../types/group.type";
 
 export const getGroupByIdService = async (id: number) => {
   const group = await findGroupById(id);

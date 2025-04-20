@@ -38,3 +38,5 @@ export const leaveGroup = async (userId: number, groupId: number) => {
     },
   });
 };
+
+// 유저 그룹조회

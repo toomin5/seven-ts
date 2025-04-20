@@ -1,5 +1,5 @@
-import { prisma } from "../../lib/prisma";
-import { CustomCreateGroup, Group } from "../../types/group.type";
+import { prisma } from "../../../lib/prisma";
+import { CustomCreateGroup, Group } from "../../../types/group.type";
 
 // 그룹 상세조회
 export const findGroupById = async (id: number) => {

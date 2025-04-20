@@ -6,7 +6,7 @@ import {
   getGroupsService,
   updateGroupService,
 } from "./groupService";
-import { findUserById } from "../users/userRepository";
+import { findUserById } from "../../users/userRepository";
 import { findGroupById } from "./groupRepository";
 
 export const handleGetGroupById = async (
